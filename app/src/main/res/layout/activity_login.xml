@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.subhipandey.android.dishapp.ui.auth.AuthViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
@@ -64,6 +70,7 @@
                 android:padding="18dp">
 
                 <EditText
+                    android:text="@={viewmodel.email}"
                     android:id="@+id/edit_text_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -76,6 +83,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:text="@={viewmodel.password}"
                     android:id="@+id/edit_text_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -97,6 +105,7 @@
                     android:textColor="@color/colorPrimaryDark" />
 
                 <Button
+                    android:onClick="@{viewmodel::onLoginButtonClick}"
                     android:id="@+id/button_sign_in"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.dinerapp
+package com.subhipandey.android.dishapp
 
 import org.junit.Test
 

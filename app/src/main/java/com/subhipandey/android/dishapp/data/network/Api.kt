@@ -1,7 +1,9 @@
 package com.subhipandey.android.dishapp.data.network
 
+import com.subhipandey.android.dishapp.data.network.responses.AuthResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -12,10 +14,11 @@ import retrofit2.http.POST
 interface Api {
     @FormUrlEncoded
     @POST("login")
-    fun userLogin(
+    suspend fun userLogin(
         @Field("email") email: String,
-        @Field("password") password: String):
-            Call<ResponseBody>
+        @Field("password") password: String
+    ): Response<AuthResponse>
+
 
     companion object{
         operator fun invoke() : Api{

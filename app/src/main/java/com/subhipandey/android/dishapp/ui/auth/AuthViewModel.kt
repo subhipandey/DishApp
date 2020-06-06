@@ -2,6 +2,7 @@ package com.subhipandey.android.dishapp.ui.auth
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.subhipandey.android.dishapp.data.repository.UserRepo
 
 class AuthViewModel : ViewModel() {
 
@@ -15,7 +16,8 @@ class AuthViewModel : ViewModel() {
              authListener?.onFailure("Invalid email or password")
             return
         }
-        authListener?.onSuccess()
+       val loginResponse = UserRepo().userLogin(email!!, password!!)
+        authListener?.onSuccess(loginResponse)
 
     }
 }

@@ -3,6 +3,7 @@ package com.subhipandey.android.dishapp.ui.auth
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.subhipandey.android.dishapp.data.repository.UserRepo
+import com.subhipandey.android.dishapp.util.ApiException
 import com.subhipandey.android.dishapp.util.Coroutines
 
 class AuthViewModel : ViewModel() {
@@ -14,16 +15,20 @@ class AuthViewModel : ViewModel() {
     fun onLoginButtonClick(view: View) {
         authListener?.onStarted()
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-             authListener?.onFailure("Invalid email or password")
+            authListener?.onFailure("Invalid email or password")
             return
         }
 
         Coroutines.main {
-            val response = UserRepo().userLogin(email!!, password!!)
-            if(response.isSuccessful){
-                authListener?.onSuccess(response.body()?.user!!)
-            }else {
-                authListener?.onFailure("Error Code: ${response.code()}")
+            try {
+                val authResponse = UserRepo().userLogin(email!!, password!!)
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!)
+            } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
             }
         }
 

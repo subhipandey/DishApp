@@ -13,6 +13,7 @@ import com.subhipandey.android.dishapp.data.database.entities.User
 import com.subhipandey.android.dishapp.databinding.ActivityLoginBinding
 import com.subhipandey.android.dishapp.util.hide
 import com.subhipandey.android.dishapp.util.show
+import com.subhipandey.android.dishapp.util.snackbar
 import com.subhipandey.android.dishapp.util.toast
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -34,14 +35,15 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
     override fun onSuccess(user : User){
         progress_bar.hide()
-        toast("${user.name} is Logged In")
+        root_layout.snackbar("${user.name} is Logged In")
+
 
     }
 
 
     override fun onFailure(message: String) {
         progress_bar.hide()
-        toast(message)
+        root_layout.snackbar(message)
 
     }
 }

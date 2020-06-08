@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.subhipandey.android.dishapp.data.repository.UserRepo
 import com.subhipandey.android.dishapp.util.ApiException
 import com.subhipandey.android.dishapp.util.Coroutines
+import com.subhipandey.android.dishapp.util.NoInternetException
 
 class AuthViewModel(
    private val repository: UserRepo
@@ -33,6 +34,8 @@ class AuthViewModel(
                 }
                 authListener?.onFailure(authResponse.message!!)
             } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
+            } catch (e: NoInternetException){
                 authListener?.onFailure(e.message!!)
             }
         }

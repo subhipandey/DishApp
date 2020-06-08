@@ -1,6 +1,7 @@
 package com.subhipandey.android.dishapp.data.network
 
 import com.subhipandey.android.dishapp.data.network.responses.AuthResponse
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -21,8 +22,15 @@ interface Api {
 
 
     companion object{
-        operator fun invoke() : Api{
+        operator fun invoke(
+            networkConnectionInterceptor: NetworkConnectionInterceptor
+        ) : Api{
+
+            val okkhttpclient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .build()
             return Retrofit.Builder()
+                .client(okkhttpclient)
                 .baseUrl("")
                 .addConverterFactory((GsonConverterFactory.create()))
                 .build()

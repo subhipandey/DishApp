@@ -13,6 +13,7 @@ import com.subhipandey.android.dishapp.R
 import com.subhipandey.android.dishapp.data.database.AppDatabase
 import com.subhipandey.android.dishapp.data.database.entities.User
 import com.subhipandey.android.dishapp.data.network.Api
+import com.subhipandey.android.dishapp.data.network.NetworkConnectionInterceptor
 import com.subhipandey.android.dishapp.data.repository.UserRepo
 import com.subhipandey.android.dishapp.databinding.ActivityLoginBinding
 import com.subhipandey.android.dishapp.ui.home.HomeActivity
@@ -27,7 +28,8 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val api = Api()
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+        val api = Api(networkConnectionInterceptor)
         val db = AppDatabase(this)
         val repository = UserRepo(api, db)
         val factory = AuthViewModelFactory(repository)

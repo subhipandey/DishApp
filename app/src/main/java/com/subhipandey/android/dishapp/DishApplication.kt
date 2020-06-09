@@ -6,6 +6,7 @@ import com.subhipandey.android.dishapp.data.network.Api
 import com.subhipandey.android.dishapp.data.network.NetworkConnectionInterceptor
 import com.subhipandey.android.dishapp.data.repository.UserRepo
 import com.subhipandey.android.dishapp.ui.auth.AuthViewModelFactory
+import com.subhipandey.android.dishapp.ui.home.profile.ProfileViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -24,5 +25,6 @@ class DishApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepo(instance(), instance())}
         bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from provider { ProfileViewModelFactory(instance()) }
     }
 }

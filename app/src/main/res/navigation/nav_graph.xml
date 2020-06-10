@@ -10,4 +10,9 @@
         android:name="com.subhipandey.android.dishapp.util.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/quotesFragment2"
+        android:name="com.subhipandey.android.dishapp.ui.home.quotes.QuotesFragment"
+        android:label="Quotes"
+        tools:layout="@layout/quotes_fragment" />
 </navigation>

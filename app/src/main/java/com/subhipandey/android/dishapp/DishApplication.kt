@@ -4,9 +4,11 @@ import android.app.Application
 import com.subhipandey.android.dishapp.data.database.AppDatabase
 import com.subhipandey.android.dishapp.data.network.Api
 import com.subhipandey.android.dishapp.data.network.NetworkConnectionInterceptor
+import com.subhipandey.android.dishapp.data.repository.QuotesRepository
 import com.subhipandey.android.dishapp.data.repository.UserRepo
 import com.subhipandey.android.dishapp.ui.auth.AuthViewModelFactory
 import com.subhipandey.android.dishapp.ui.home.profile.ProfileViewModelFactory
+import com.subhipandey.android.dishapp.ui.home.quotes.QuotesViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -24,7 +26,9 @@ class DishApplication : Application(), KodeinAware {
         bind() from singleton {Api(instance())}
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepo(instance(), instance())}
+        bind() from singleton { QuotesRepository(instance(), instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
+        bind() from provider {QuotesViewModelFactory(instance())}
     }
 }

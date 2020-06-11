@@ -2,6 +2,7 @@ package com.subhipandey.android.dishapp
 
 import android.app.Application
 import com.subhipandey.android.dishapp.data.database.AppDatabase
+import com.subhipandey.android.dishapp.data.database.preferences.PreferenceProvider
 import com.subhipandey.android.dishapp.data.network.Api
 import com.subhipandey.android.dishapp.data.network.NetworkConnectionInterceptor
 import com.subhipandey.android.dishapp.data.repository.QuotesRepository
@@ -26,7 +27,8 @@ class DishApplication : Application(), KodeinAware {
         bind() from singleton {Api(instance())}
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepo(instance(), instance())}
-        bind() from singleton { QuotesRepository(instance(), instance()) }
+        bind() from singleton { PreferenceProvider(instance())}
+        bind() from singleton { QuotesRepository(instance(), instance(),instance() ) }
         bind() from provider { AuthViewModelFactory(instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from provider {QuotesViewModelFactory(instance())}
